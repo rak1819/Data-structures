@@ -11,7 +11,8 @@ class CheckBit
     }
     
 }
-
+time complexity = o(1)
+space complexity = o(1)
 
 test case:
 
