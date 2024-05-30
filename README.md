@@ -1,2 +1,2 @@
 # Data-structures
-dsa practice questions
+Data structures practice questions 
