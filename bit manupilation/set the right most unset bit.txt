@@ -1,0 +1,35 @@
+class Solution{
+    static int setBit(int n){
+        int c = check(n);
+        if(c!=-1){
+            return n^(1<<c);
+        }
+        return n;
+    }
+    static int check(int n){
+        if(n==0){
+            return -1;
+        }
+        int cnt = 0;
+        while(n>1){
+            if((n&1)==0){
+                return cnt;
+            }
+            cnt++;
+            n = n>>1;
+        }
+        return -1;
+    }
+}
+
+time complexity : o(logn)
+space complexity: o(1)
+
+Input:
+N = 6
+Output:
+7
+Explanation:
+The binary representation of 6 is 110.
+After setting right most bit it becomes
+111 which is 7.

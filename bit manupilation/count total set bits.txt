@@ -1,0 +1,67 @@
+
+Brute force:
+
+class Solution{
+    
+    public static int countSetBits(int n){
+    
+        int count = 0;
+        int i =1;
+        while(i <=n){
+            count+=check(i);
+            i++;
+        }
+        return count;
+        
+    }
+    public static int check(int n){
+        int count = 0;
+        while(n>1){
+            count+= n&1;
+            n = n>>1;
+        }
+        if(n==1){
+            count+=1;
+        }
+        return count;
+    }
+}
+ o(nlogn)-time complexicity
+_____________________________________________________________
+
+optimal using finding 2 pow and recursion
+
+class Solution{
+    
+    //Function to return sum of count of set bits in the integers from 1 to n.
+    public static int countSetBits(int n){
+        if(n == 0){
+            return 0;
+        }
+        int x = checkpow(n);
+        int ans = ((1<<(x-1))*x)+(n-(1<<x))+1+countSetBits(n-(1<<x));
+        return ans;
+    
+    }
+    public static int checkpow(int n){
+        int c =0;
+        while((1<<c)<=n){
+            c++;
+        }
+        return c-1;
+    }
+}
+
+o(logn) - time complexity
+
+Input: N = 4
+Output: 5
+Explanation:
+For numbers from 1 to 4.
+For 1: 0 0 1 = 1 set bits
+For 2: 0 1 0 = 1 set bits
+For 3: 0 1 1 = 2 set bits
+For 4: 1 0 0 = 1 set bits
+Therefore, the total set bits is 5.
+
+

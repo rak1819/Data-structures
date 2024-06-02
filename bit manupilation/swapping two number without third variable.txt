@@ -1,0 +1,17 @@
+class Solution{
+    static List<Integer> get(int a,int b)
+    {
+        a = a^b;
+        b = a^b;
+        a = a^b;
+        List<Integer> obj = new ArrayList<>();
+        obj.add(a);
+        obj.add(b);
+        return obj;
+    }
+}
+
+Input: a = 13, b = 9
+Output: 9 13
+Explanation: after swapping it
+becomes 9 and 13.
