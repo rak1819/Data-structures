@@ -1,0 +1,88 @@
+All divisors of a Number
+
+
+Given an integer N, print all the divisors of N in the ascending order.
+ 
+
+Example 1:
+
+Input : 20
+Output: 1 2 4 5 10 20
+Explanation: 20 is completely 
+divisible by 1, 2, 4, 5, 10 and 20.
+
+Example 2:
+
+Input: 21191
+Output: 1 21191
+Explanation: As 21191 is a prime number,
+it has only 2 factors(1 and the number itself).
+
+
+constraints to print in order and to use in time complexity - o(sqrt(n))
+__________________________________________________________________________
+
+explanation:
+
+n = 36 
+ouput : = 1,2,3,4,6,9,12,18,36
+
+1   *   36 = 36
+
+2   *   18 = 36
+
+3   *   12 = 36
+
+4   *   9  = 36
+
+6   *   6  = 36
+
+ iterate upto sqrt(36) = 6
+ 
+36/1 = 36
+36/2 = 18
+36/3 = 12
+36/4 = 9
+36/6 = 6  (i =6 ,n = 36) another constraint (36/6!=6)
+___________________________________________________________________________
+
+java code:
+class Solution {
+    public static void print_divisors(int n) {
+        List<Integer> obj = new ArrayList<>();
+        List<Integer> obj1 = new ArrayList<>();
+        if(n ==1){
+            System.out.print(1);
+        }
+        else{
+            
+        int p =0;
+        for(int i =1;i*i<=n;i++){
+            if(n%i==0){
+                obj.add(i);
+                if(i!=(n/i)){
+                    obj1.add(n/i);
+                }
+            }
+            
+        }
+        for(int i:obj){
+            System.out.print(i+" ");
+        }
+        for(int i =obj1.size()-1;i>=0;i--){
+            if(i==0){
+                System.out.print(obj1.get(i));
+            }
+            else{
+                System.out.print(obj1.get(i)+" ");
+            
+        }
+        
+    }
+  }
+ }
+}
+
+time  complexity = o(sqrt(n))
+space complexity = o(sqrt(n))
+
