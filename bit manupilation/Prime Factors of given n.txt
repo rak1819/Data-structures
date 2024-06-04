@@ -1,0 +1,80 @@
+Prime Factors
+
+Example 1:
+
+Input: N = 100
+Output: 2 5
+Explanation: 2 and 5 are the unique prime
+factors of 100.
+Example 2:
+
+Input: N = 35
+Output: 5 7
+Explanation: 5 and 7 are the unique prime
+factors of 35.
+
+
+prime factors of an given number that which are divisible by number and it self and also given N
+
+optimal approach which uses school lcm approach
+
+2  |780
+   ------
+2  |390
+   ------
+3  |195
+   ------
+5  |65
+   ------
+13 |13
+   ------  the prime factors of 780 is 2,3,5,13 dose not contain duplicates
+    1
+
+same for example 1: 100
+
+2  |100
+   ------
+2  |50
+   ------
+5  |25
+   ------
+5  |5
+   ------  the prime factors of 100 is (2,5)
+    1
+
+
+java code :
+____________________________________________________________________________________
+
+class Solution
+{
+    public int[] AllPrimeFactors(int n)
+    
+    {
+        List<Integer> ans = new ArrayList<>();
+        int sqr = (int)Math.sqrt(n);
+        for(int i=2;i<=sqr;i++){
+            if(n%i==0){
+                ans.add(i);
+                while(n%i==0){
+                    n = n/i;
+                }
+                
+            }
+        }
+        if(n!=1){
+            ans.add(n);
+        }
+        int length = ans.size();
+        int arr[] = new int[length];
+        int p =0;
+        for(int i:ans){
+            arr[p++]=i;
+        }
+        return arr;
+    }
+}
+ 
+time complexity is   : o(square root of(n)) optimal approach by considering square root approche
+space complexity     : o(n)
+
