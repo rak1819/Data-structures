@@ -1,0 +1,37 @@
+odd or even without using modulus
+
+Given a positive integer N, determine whether it is odd or even.
+
+Example 1:
+
+Input:
+N = 1
+Output:
+odd
+Explanation:
+The output is self-
+explanatory.
+
+explanation:
+
+in bits if the right most bit is 1 then is it odd or else it is even
+
+n = 8 in bits (1000)
+     &
+1 =   in bits (0001)
+_____________________
+	      (0000)  = 0 then it is even  or else odd
+
+java code:
+_____________________________________________________________________
+
+class Solution{
+    static String oddEven(int N){
+        String[] a = {"even","odd"};
+        return a[N&1];
+    }
+}
+
+_____________________________________________________________________
+time complexity : o(1)
+space complexity: o(1)
