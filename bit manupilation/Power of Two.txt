@@ -1,0 +1,44 @@
+problem : Power of Two
+Easy
+Topics
+Companies
+Given an integer n, return true if it is a power of two. Otherwise, return false.
+
+An integer n is a power of two, if there exists an integer x such that n == 2x.
+
+ 
+
+Example 1:
+
+Input: n = 1
+Output: true
+Explanation: 20 = 1
+Example 2:
+
+Input: n = 16
+Output: true
+Explanation: 24 = 16
+
+explanation : example = n =8
+
+n = 8 in bits(1000)
+	& 
+n-1=7 in bits(0111)
+-------------------
+             (0000) == 0 then it is power of two
+
+java code in leetcode problem number 231
+_________________________________________________ 
+
+class Solution {
+    public boolean isPowerOfTwo(int n) {
+
+        if((n&(n-1))==0 && n!=0 && n!=Integer.MIN_VALUE){
+            return true;
+        }
+        return false;
+    }
+}
+
+time complexity  = o(1);
+space complexity = o(1);
