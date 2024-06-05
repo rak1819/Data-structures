@@ -1,0 +1,48 @@
+You are given a positive number N. Using the concept of Sieve, compute its prime factorisation.
+
+Example:
+
+Input: 
+N = 12246
+Output: 
+2 3 13 157
+Explanation: 
+2*3*13*157 = 12246 = N.
+
+explanation :
+using sieve of Eratosthenes(smallest prime factor method)
+
+
+java code :
+
+_______________________________________________________________________________
+
+class Solution {
+
+    static List<Integer> findPrimeFactors(int N) {
+        int[] arr = new int[N+1];
+        for(int i =1;i<=N;i++){
+            arr[i]=i;
+        }
+        for(int i=2;i*i<=N;i++){
+            if(arr[i]==i){
+                for(int j=i*i;j<=N;j+=i){
+                    if(arr[j]==j){
+                        arr[j]=i;
+                    }
+                }
+            }
+        }
+        List<Integer> obj = new ArrayList<>();
+        while(N!=1){
+            obj.add(arr[N]);
+            N=N/arr[N];
+        }
+        return obj;
+
+    }
+}
+_________________________________________________________________________________
+
+time complexity : o(nlogn*nlogn)
+space complexity: o(nlogn)
