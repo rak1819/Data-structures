@@ -1,0 +1,94 @@
+Intuition:
+----------
+java code
+
+Approach:
+--------
+it uses mathematical logic which uses to slove
+which get previous min value when we pop up
+
+push :push(2 * Val - min)
+pop : (2 * min) - (modified value)
+
+Complexity
+-----------
+Time complexity:o(1) for all functions
+Space complexity:o(n) for using stack
+
+java Code:
+-----------------------------------------------------------------------------
+class MinStack {
+    Stack<Long>  st = new Stack<Long>();
+    Long min;
+
+
+    public MinStack() {
+        min = Long.MAX_VALUE;
+    }
+    
+    public void push(int value) {
+        Long val = Long.valueOf(value);
+        if(st.isEmpty()){
+            min = val;
+            st.push(val);
+        }
+        else{
+            if(val<min){
+                st.push(2*val-min);
+                min = val;
+            }
+            else{
+                st.push(val);
+            }
+        }
+    }
+    
+    public void pop() {
+        if(st.isEmpty()){
+            return;
+        }
+        Long val =st.pop();
+        if(val <min){
+            min = 2*min - val;
+        }
+        
+    }
+    
+    public int top() {
+        Long val = st.peek();
+        if(val<min){
+            return min.intValue();
+        }
+        return val.intValue();
+        
+    }
+    
+    public int getMin() {
+        return min.intValue();
+    }
+}
+
+/**
+ * Your MinStack object will be instantiated and called as such:
+ * MinStack obj = new MinStack();
+ * obj.push(val);
+ * obj.pop();
+ * int param_3 = obj.top();
+ * int param_4 = obj.getMin();
+____________________________________________________________________________
+Input
+["MinStack","push","push","push","getMin","pop","top","getMin"]
+[[],[-2],[0],[-3],[],[],[],[]]
+
+Output
+[null,null,null,null,-3,null,0,-2]
+
+Explanation
+MinStack minStack = new MinStack();
+minStack.push(-2);
+minStack.push(0);
+minStack.push(-3);
+minStack.getMin(); // return -3
+minStack.pop();
+minStack.top();    // return 0
+minStack.getMin(); // return -2
