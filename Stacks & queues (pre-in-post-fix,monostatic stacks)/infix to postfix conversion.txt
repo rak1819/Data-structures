@@ -1,0 +1,92 @@
+Given an infix expression in the form of string str. Convert this infix expression to postfix expression.
+
+Infix expression: The expression of the form a op b. When an operator is in-between every pair of operands.
+Postfix expression: The expression of the form a b op. When an operator is followed for every pair of operands.
+Note: The order of precedence is: ^ greater than * equals to / greater than + equals to -. Ignore the right associativity of ^.
+Example 1:
+
+Input: str = "a+b*(c^d-e)^(f+g*h)-i"
+Output: abcd^e-fgh*+^*+i-
+Explanation:
+After converting the infix expression 
+into postfix expression, the resultant 
+expression will be abcd^e-fgh*+^*+i-
+
+java code:
+
+______________________________________________________________________________
+
+class Solution {
+    // Function to convert an infix expression to a postfix expression.
+    public static String infixToPostfix(String exp) {
+        StringBuilder obj = new StringBuilder();
+        Stack<Character> st = new Stack<Character>();
+        for(char c:exp.toCharArray()){
+            if((c>='a'&& c<='z')||(c>='A' && c<='Z')||(c>='0' && c<='9')){
+                obj.append(c);
+            }
+            else if(c=='+' || c=='-'){
+                if(st.isEmpty()){
+                    st.push(c);
+                }
+                else{
+                    while(!st.isEmpty()){
+                        char check = st.peek();
+                        if(check=='+' || check=='-'||check=='*' || check=='/'||check =='^'){
+                            obj.append(st.pop());
+                        }
+                        else{
+                            break;
+                        }
+                    }
+                    st.push(c);
+                }
+            }
+            else if(c == '/' || c == '*'){
+                while(!st.isEmpty()){
+                    char check = st.peek();
+                    if(check == '/' || check =='*' || check == '^'){
+                        obj.append(st.pop());
+                    }
+                    else{
+                        break;
+                    }
+                }
+                st.push(c);
+            }
+            else if(c =='^'){
+                while(!st.isEmpty()){
+                    char check = st.peek();
+                    
+                    if(check=='^'){
+                        obj.append(st.pop());
+                    }
+                    else{
+                        break;
+                    }
+                }
+                st.push(c);
+            }
+            else if(c ==')'){
+                while(!st.isEmpty()){
+                    char check = st.pop();
+                    if(check!='('){
+                        obj.append(check);
+                    }
+                    else{
+                        break;
+                    }
+                }
+            }
+            else{
+                st.push(c);
+            }
+            
+        }
+        while(!st.isEmpty()){
+            obj.append(st.pop());
+        }
+        return obj.toString();
+    }
+}
+____________________________________________________________________________
