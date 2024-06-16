@@ -1,0 +1,38 @@
+Given an array of N integers and Q queries of indices, print the number of next greater elements(NGEs) to the right of the given index element. 
+Example:
+
+Input:  arr     = [3, 4, 2, 7, 5, 8, 10, 6]
+        queries = 2
+        indices = [0, 5]
+Output:  6, 1
+Explanation:  
+The next greater elements to the right of 3(index 0)
+are 4,7,5,8,10,6.  
+The next greater elements to the right of 8(index 5)
+is only 10.
+
+java code :
+it doesn't has optimal the brute force is optimal
+__________________________________________________________________________
+
+class Solution {
+  public static int[] count_NGEs(int N, int arr[], int queries, int indices[]) {
+    int n = indices.length;
+    for(int i =0;i<n;i++){
+        int ind = indices[i];
+        int sum = 0;
+        for(int j = ind+1;j<arr.length;j++){
+            if(arr[ind]<arr[j]){
+                sum++;
+            }
+        }
+        indices[i]=sum;
+    }
+    return indices;
+     
+  }
+}
+
+____________________________________________________________________________
+Time Complexity: O(N * queries)
+space complexity:O(queries).
