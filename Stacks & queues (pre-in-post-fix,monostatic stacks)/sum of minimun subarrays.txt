@@ -1,0 +1,77 @@
+Given an array of integers arr, find the sum of min(b), where b ranges over every (contiguous) subarray of arr. Since the answer may be large, return the answer modulo 109 + 7.
+
+ 
+
+Example 1:
+
+Input: arr = [3,1,2,4]
+Output: 17
+Explanation: 
+Subarrays are [3], [1], [2], [4], [3,1], [1,2], [2,4], [3,1,2], [1,2,4], [3,1,2,4]. 
+Minimums are 3, 1, 2, 4, 1, 1, 2, 1, 1, 1.
+Sum is 17.
+Example 2:
+
+Input: arr = [11,81,94,43,3]
+Output: 444
+ 
+
+java code :
+______________________________________________________________________________
+
+class Solution {
+    public int sumSubarrayMins(int[] arr) {
+        int[] nextsmall = right(arr);
+        int[] prevsmall = left(arr);
+        long count = 0;
+        long mod = 1000000007;
+        for(int i =0;i<arr.length;i++){
+            int first = i - prevsmall[i];
+            int second = nextsmall[i]-i;
+            long prod = (first*second)%mod;
+            prod = (prod*arr[i])%mod;
+            count = (count%mod+prod)%mod;
+        }
+        return (int)count;
+        
+    }
+    public int[] right(int[] arr){
+        Stack<Integer> st = new Stack<Integer>();
+        int[] ans = new int[arr.length];
+        for(int i =arr.length-1;i>=0;i--){
+            while(!st.isEmpty() && arr[st.peek()]>=arr[i]){
+                st.pop();
+            }
+            if(st.isEmpty()){
+                ans[i]=arr.length;
+            }
+            else{
+                ans[i] = st.peek(); 
+            }
+            st.push(i);
+        }
+        return ans;
+    }
+     public int[] left(int[] arr){
+        Stack<Integer> st = new Stack<Integer>();
+        int[] ans = new int[arr.length];
+        for(int i=0;i<arr.length;i++){
+            while(!st.isEmpty() && arr[st.peek()]>arr[i]){
+                st.pop();
+            }
+            if(st.isEmpty()){
+                ans[i]=-1;
+            }
+            else{
+                ans[i] = st.peek(); 
+            }
+            st.push(i);
+        }
+        return ans;
+    }
+}
+
+_____________________________________________________________________________
+
+time complexity : = o(n)
+space complexity: = o(2n)
